@@ -5,11 +5,11 @@ import fs from 'fs';
 
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "./uploads");
+    destination: (req, file, callback) => {
+        callback(null, "./uploads");
     },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
+    filename: (req, file, callback) => {
+        callback(null, file.originalname);
     }
 });
 

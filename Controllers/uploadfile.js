@@ -7,11 +7,16 @@ import Data from '../Models/data.js'
 
 export const uploadExcelFile=async(req, res) => {
     try {
+        
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
+        }
+
         const jsonArray = [];
-        const workbook = xlsx.readFile(req.file.path);
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const excelData = xlsx.utils.sheet_to_json(worksheet, { raw: false });
+        const workBook = xlsx.readFile(req.file.path);
+        const sheetName = workBook.SheetNames[0];
+        const workSheet = workBook.Sheets[sheetName];
+        const excelData = xlsx.utils.sheet_to_json(workSheet, { raw: true });
 
  
         for (const row of excelData) {
@@ -29,7 +34,7 @@ export const uploadExcelFile=async(req, res) => {
             }
         }
         
-        res.status(200).json(excelData);
+        res.status(200).json({message:"Successful"});
        
     } catch (error) {
         console.error(error);

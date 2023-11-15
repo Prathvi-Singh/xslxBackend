@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 mongoose.set('strictQuery', true);
-// import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
-// dotenv.config()
+dotenv.config()
 
-const connection =async(URL)=>{
-    
+const connection =async()=>{
+    const URL=process.env.URL;;
     try{
         await mongoose.connect(URL,{useNewUrlParser:true}) 
         console.log("Database connected successfully");
